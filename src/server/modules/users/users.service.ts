@@ -1,18 +1,24 @@
+import { db } from '@/db/db'
+import { usersTable } from '@/db/schema'
 import { CreateUserDTO, User } from '@/types/user.type'
-
-const users: User[] = [
-  { id: '1', name: 'John Doe' },
-  { id: '2', name: 'Jane Doe' },
-  { id: '3', name: 'Alice' },
-  { id: '4', name: 'Bob' },
-]
+import { eq } from 'drizzle-orm'
 
 export const getUsers = async (): Promise<User[]> => {
+  const users = await db.select().from(usersTable)
   return users
 }
-
 export const createUser = async (user: CreateUserDTO): Promise<User> => {
-  const newUser: User = { id: Math.random().toString(36).substring(2, 11), ...user }
-  users.push(newUser)
-  return newUser
+  const result = await db
+    .insert(usersTable)
+    .values({
+      name: user.name,
+    })
+    .returning()
+  return result[0]
+}
+
+export const deleteUser = async (id: number): Promise<User> => {
+  console.log('id', id)
+  const result = await db.delete(usersTable).where(eq(usersTable.id, id)).returning()
+  return result[0]
 }
