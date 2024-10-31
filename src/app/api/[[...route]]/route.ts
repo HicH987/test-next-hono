@@ -8,13 +8,16 @@ const app = new Hono().basePath('/api')
 
 app.get('/hello', (c) => {
   return c.json({
-    message: 'Hello from Hono!'
+    message: 'Hello from Hono!',
+  })
+})
+app.get('/hello/:name', (c) => {
+  return c.json({
+    message: `Hello, ${c.req.param('name')}!`,
   })
 })
 
-app.route('/users', usersRoutes);
-
-
+app.route('/users', usersRoutes)
 
 export const GET = handle(app)
 export const POST = handle(app)
