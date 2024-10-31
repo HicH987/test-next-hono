@@ -2,7 +2,7 @@ import { Hono } from 'hono'
 import { handle } from 'hono/vercel'
 import usersRoutes from '@/server/modules/users/users.routes'
 
-export const runtime = 'edge'
+export const runtime = 'nodejs'
 
 const app = new Hono().basePath('/api')
 
