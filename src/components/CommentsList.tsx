@@ -48,22 +48,3 @@ export function CommentsListSus() {
     </ul>
   )
 }
-
-export function CommentsListPrefetch() {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['comments'],
-    queryFn: fetchComments,
-    enabled: false,
-  })
-
-  if (isLoading) return <p>Loading Users...</p>
-  if (error) return <p>Error: {error.message}</p>
-
-  return (
-    <ul>
-      {data?.slice(0,5).map((comment) => (
-        <li key={comment.id}>{comment.email}</li>
-      ))}
-    </ul>
-  )
-}
