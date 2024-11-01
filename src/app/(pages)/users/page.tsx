@@ -1,13 +1,12 @@
-import { UserList, UserListSus } from '@/components/UsersList'
+import { Post, UserList, UserListSus } from '@/components/UsersList'
 import { Suspense } from 'react'
 
 export default async function Test() {
-
   return (
     <main className="space-y-10">
       {/* UsersList Component */}
-      <section className='space-y-2'>
-        <h2 className='text-xl font-bold text-red-400'>Fetching with UserList</h2>
+      <section className="space-y-2">
+        <h2 className="text-xl font-bold text-red-400">Fetching with UserList</h2>
         <UserList />
       </section>
 
@@ -20,6 +19,10 @@ export default async function Test() {
       </section> */}
 
 
+      <section className="space-y-2">
+        <h2 className="text-xl font-bold text-red-400">Fetching with post with user</h2>
+        <Post postId={1} />
+      </section>
     </main>
   )
 }
